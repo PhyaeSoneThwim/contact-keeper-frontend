@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import IconButton from "./iconButton";
+import Icon from "./icon";
 const Input = ({
   label,
   id,
@@ -62,11 +62,11 @@ const Input = ({
         />
         <div className="absolute flex items-center justify-center inset-y-0 right-0 pr-1">
           {type === "password" && (
-            <IconButton onClick={handleToggle}>
+            <Icon onClick={handleToggle}>
               {(isTextField && (
                 <FiEyeOff size={14} className="text-gray-600" />
               )) || <FiEye size={14} className="text-gray-600" />}
-            </IconButton>
+            </Icon>
           )}
         </div>
       </div>

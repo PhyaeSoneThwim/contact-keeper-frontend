@@ -1,15 +1,20 @@
 import React from "react";
-
-const IconButton = ({ icon, children, onClick }) => {
+const IconButton = ({ label, icon, variant, onClick }) => {
   return (
     <button
-      onClick={onClick}
       type="button"
-      className="focus:outline-none transition-all ease-in-out duration-300 inline-block hover:bg-gray-100 p-2 rounded-full items-center justify-center"
+      onClick={onClick && onClick}
+      className={`focus:outline-none text-xs font-semibold text-white px-3 py-2 leading-4 rounded-full inline-flex items-center ${
+        (variant === "primary" && "bg-purple-500 hover:bg-purple-600") ||
+        "bg-red-500 hover:bg-red-600"
+      }`}
     >
-      {(icon !== null && icon) || children}
+      {icon}
+      <span className="ml-2">{label}</span>
     </button>
   );
 };
-
+IconButton.defaultProps = {
+  variant: "primary",
+};
 export default IconButton;
