@@ -6,7 +6,8 @@ const NavLink = ({ label, icon, to }) => {
     <Link to={to}>
       <button
         className={`inline-flex focus:outline-none text-sm text-gray-700 font-semibold py-2 leading-5 border-b px-2 ${
-          (pathname === to && "border-purple-500") || "border-transparent"
+          (pathname === to && "border-purple-500 text-purple-500") ||
+          "border-transparent"
         }  items-center`}
       >
         {icon}

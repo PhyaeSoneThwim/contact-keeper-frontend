@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../layouts/header";
-const Statistics = (props) => {
+const DeletedContacts = (props) => {
   return (
     <div className="w-full min-h-screen">
       <Header />
@@ -11,4 +11,4 @@ const Statistics = (props) => {
   );
 };
 
-export default Statistics;
+export default DeletedContacts;

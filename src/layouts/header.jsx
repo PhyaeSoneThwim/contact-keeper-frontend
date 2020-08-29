@@ -2,7 +2,7 @@ import React from "react";
 import {
   FiUsers,
   FiLogOut,
-  FiPieChart,
+  FiTrash2,
   FiPhoneCall,
   FiEdit,
   FiMail,
@@ -42,14 +42,14 @@ const Header = (props) => {
         </div>
         <div className="inline-flex space-x-2 items-center">
           <NavLink
-            to="/statistics"
-            icon={<FiPieChart size={16} />}
-            label="Statistics"
+            to="/contacts"
+            icon={<FiPhoneCall size={14} />}
+            label="Contacts"
           />
           <NavLink
-            to="/contacts"
-            icon={<FiPhoneCall size={16} />}
-            label="Contacts"
+            to="/deleted-contacts"
+            icon={<FiTrash2 size={14} />}
+            label="Deleted"
           />
         </div>
       </div>
