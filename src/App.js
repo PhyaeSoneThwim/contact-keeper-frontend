@@ -2,7 +2,7 @@ import React from "react";
 import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import DeletedContacts from "./pages/deleted";
+import Trash from "./pages/transh";
 import Contacts from "./pages/contacts";
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/deleted-contacts" component={DeletedContacts} />
+        <Route path="/trash" component={Trash} />
         <Route path="/contacts" component={Contacts} />
       </Switch>
     </Router>

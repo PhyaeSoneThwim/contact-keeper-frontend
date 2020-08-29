@@ -46,11 +46,7 @@ const Header = (props) => {
             icon={<FiPhoneCall size={14} />}
             label="Contacts"
           />
-          <NavLink
-            to="/deleted-contacts"
-            icon={<FiTrash2 size={14} />}
-            label="Deleted"
-          />
+          <NavLink to="/trash" icon={<FiTrash2 size={14} />} label="Trash" />
         </div>
       </div>
     </div>
