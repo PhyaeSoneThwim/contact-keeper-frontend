@@ -28,12 +28,11 @@ const EditContact = ({ editOpen, toggleEditOpen, editId }) => {
       [name]: null,
     });
   };
-  console.log(editId);
   return (
     <SideDrawer maxWidth="2xl" open={editOpen} onClose={toggleEditOpen}>
       <div className="px-6">
         <span className="font-semibold text-gray-700">
-          Add Contact Information
+          Edit contact information
         </span>
         <div className="flex items-start">
           <div className="w-1/2">
@@ -78,7 +77,7 @@ const EditContact = ({ editOpen, toggleEditOpen, editId }) => {
               />
             </div>
             <div className="mt-4">
-              <Button label="Submit" type="submit" />
+              <Button label="Update" type="submit" />
             </div>
           </div>
           <div className="w-1/2">
