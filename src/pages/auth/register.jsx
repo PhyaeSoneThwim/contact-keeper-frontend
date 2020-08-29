@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import _signup from "../../assets/images/_signup.svg";
 import Input from "../../components/form/input";
+import Alert from "../../components/alert";
 import Button from "../../components/form/button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import AuthContext from "../../context/auth/authContext";
+import { FiAlertOctagon, FiCheckCircle } from "react-icons/fi";
 const Register = () => {
+  const history = useHistory();
+  const auth = useContext(AuthContext);
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      history.push("/");
+    }
+  }, [auth.isAuthenticated]);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -18,7 +29,7 @@ const Register = () => {
       name: Yup.string().required("Name is required"),
       email: Yup.string()
         .email("Email is not correct")
-        .required("Email is require"),
+        .required("Email is required"),
       confirmPassword: Yup.string()
         .required("Confirm password is required")
         .test("", "Passwords mismatched", function (value) {
@@ -26,7 +37,12 @@ const Register = () => {
         }),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      auth.register({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        confirmPassword: values.confirmPassword,
+      });
     },
   });
   return (
@@ -39,6 +55,20 @@ const Register = () => {
       </div>
       <div className="md:w-full py-20 lg:w-2/5 min-h-screen flex items-center justify-center">
         <div className="sm:max-w-sm w-full md:max-w-xs">
+          {auth.error && (
+            <Alert
+              type="error"
+              label={auth.error}
+              icon={<FiAlertOctagon size={16} />}
+            />
+          )}
+          {auth.success && (
+            <Alert
+              type="success"
+              label={auth.success}
+              icon={<FiCheckCircle size={16} />}
+            />
+          )}
           <span className="text-gray-700 block font-semibold">
             Welcome from
             <span className="ml-1 text-purple-500 font-semibold">
@@ -56,6 +86,7 @@ const Register = () => {
                 value={formik.values.email}
                 label="Name"
                 type="text"
+                id="user_name"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
@@ -67,6 +98,7 @@ const Register = () => {
                 name="email"
                 value={formik.values.email}
                 label="Email address"
+                id="user_email"
                 hint="user@gmail.com"
                 type="email"
                 onChange={formik.handleChange}
@@ -77,6 +109,7 @@ const Register = () => {
             </div>
             <div className="mt-4">
               <Input
+                id="user_password"
                 name="password"
                 type="password"
                 label="Password"
@@ -89,6 +122,7 @@ const Register = () => {
             </div>
             <div className="mt-4">
               <Input
+                id="user_confirm_password"
                 name="confirmPassword"
                 type="password"
                 label="Confirm password"

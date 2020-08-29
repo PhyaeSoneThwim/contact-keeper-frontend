@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Header from "../../layouts/header";
+import { useHistory } from "react-router-dom";
+import AuthContext from "../../context/auth/authContext";
 const DeletedContacts = (props) => {
+  const history = useHistory();
+  const auth = useContext(AuthContext);
+  useEffect(() => {
+    if (!auth.isAuthenticated) {
+      history.push("/login");
+    }
+  }, [auth.isAuthenticated]);
   return (
     <div className="w-full min-h-screen">
       <Header />

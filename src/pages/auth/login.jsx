@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import _login from "../../assets/images/_login.svg";
 import Input from "../../components/form/input";
 import Button from "../../components/form/button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import AuthContext from "../../context/auth/authContext";
 const Login = () => {
+  const history = useHistory();
+  const auth = useContext(AuthContext);
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      history.push("/");
+    }
+  }, [auth.isAuthenticated]);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -13,10 +21,12 @@ const Login = () => {
     },
     validationSchema: Yup.object({
       password: Yup.string().required("Password is required"),
-      email: Yup.string().email("Invalid email address").required("Required"),
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is Required"),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      auth.login({ email: values.email, password: values.password });
     },
   });
   return (
@@ -42,6 +52,7 @@ const Login = () => {
             <div className="mt-6">
               <Input
                 name="email"
+                id="user_email"
                 value={formik.values.email}
                 label="Email address"
                 hint="user@gmail.com"
@@ -54,6 +65,7 @@ const Login = () => {
             </div>
             <div className="mt-4">
               <Input
+                id="user_password"
                 name="password"
                 type="password"
                 label="Password"

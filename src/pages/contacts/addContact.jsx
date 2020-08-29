@@ -28,7 +28,6 @@ const AddContact = ({ addOpen, toggleAddOpen }) => {
       [name]: null,
     });
   };
-  console.log(contactData);
   return (
     <SideDrawer maxWidth="2xl" open={addOpen} onClose={toggleAddOpen}>
       <div className="px-6">
