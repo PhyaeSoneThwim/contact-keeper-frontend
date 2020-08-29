@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import _signup from "../../assets/images/_signup.svg";
 import Input from "../../components/form/input";
 import Button from "../../components/form/button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
-const Register = (props) => {
+const Register = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -32,7 +32,7 @@ const Register = (props) => {
   return (
     <div className="w-full min-h-screen flex">
       <div className="md:hidden lg:flex flex-col items-center justify-center  lg:w-3/5 min-h-screen bg-purple-100">
-        <img src={_signup} className="w-1/2" />
+        <img alt="illustrations_1" src={_signup} className="w-1/2" />
         <span className="mt-10 font-semibold text-lg block text-purple-500">
           Let's keep your contacts
         </span>

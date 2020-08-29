@@ -32,7 +32,7 @@ const Input = ({
       {label && (
         <label
           htmlFor={id}
-          className="block mb-1 text-sm text-gray-700 font-medium"
+          className="block mb-1 text-sm text-gray-600 font-medium"
         >
           {label}
         </label>
@@ -46,7 +46,7 @@ const Input = ({
         <input
           autoComplete="off"
           ref={inputRef}
-          className={`border rounded-lg leading-5 py-2 ${
+          className={`border rounded-lg leading-4 xl:leading-5 py-2 ${
             (startIcon && "pl-8") || "pl-3"
           } pr-3 text-sm w-full block ${
             (error && "border-red-600") ||

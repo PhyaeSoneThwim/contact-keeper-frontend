@@ -5,7 +5,7 @@ import Button from "../../components/form/button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
-const Login = (props) => {
+const Login = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -22,7 +22,7 @@ const Login = (props) => {
   return (
     <div className="w-full min-h-screen flex">
       <div className="md:hidden lg:flex flex-col items-center justify-center  lg:w-3/5 min-h-screen bg-purple-100">
-        <img src={_login} className="w-1/2" />
+        <img src={_login} alt="illustrations" className="w-1/2" />
         <span className="mt-10 font-semibold text-lg block text-purple-500">
           Let's keep your contacts
         </span>
