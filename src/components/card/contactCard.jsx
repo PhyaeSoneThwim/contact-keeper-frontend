@@ -9,7 +9,7 @@ import {
   FiTrash,
   FiCornerUpLeft,
 } from "react-icons/fi";
-const ContactCard = ({ gender, imgUrl, name, phone, email, address }) => {
+const ContactCard = ({ id, imgUrl, name, phone, email, address, onEdit }) => {
   return (
     <div className="flex mt-2 border border-gray rounded-lg py-2 px-3 items-start">
       <img
@@ -25,7 +25,7 @@ const ContactCard = ({ gender, imgUrl, name, phone, email, address }) => {
       </div>
       <div className="inline-flex items-center">
         <Icon icon={<FiCornerUpLeft size={14} />} />
-        <Icon icon={<FiEdit size={14} />} />
+        <Icon onClick={() => onEdit(id)} icon={<FiEdit size={14} />} />
         <Icon icon={<FiTrash size={14} />} />
       </div>
     </div>
