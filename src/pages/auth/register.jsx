@@ -1,22 +1,21 @@
 import React, { useContext, useEffect } from "react";
+import { useFormik } from "formik";
+import { Link, useHistory } from "react-router-dom";
+import * as Yup from "yup";
 import _signup from "../../assets/images/_signup.svg";
 import Input from "../../components/form/input";
-import Alert from "../../components/alert";
 import Button from "../../components/form/button";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { Link, useHistory } from "react-router-dom";
+import Alert from "../../components/alert";
+
 import AuthContext from "../../context/auth/authContext";
-import { FiAlertOctagon, FiCheckCircle } from "react-icons/fi";
 const Register = () => {
   const history = useHistory();
-  const auth = useContext(AuthContext);
+  const { register, error, success, isAuthenticated } = useContext(AuthContext);
   useEffect(() => {
-    if (auth.isAuthenticated) {
+    if (isAuthenticated) {
       history.push("/");
     }
-  }, [auth.isAuthenticated]);
-
+  }, [isAuthenticated]);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -37,7 +36,7 @@ const Register = () => {
         }),
     }),
     onSubmit: (values) => {
-      auth.register({
+      register({
         name: values.name,
         email: values.email,
         password: values.password,
@@ -55,21 +54,9 @@ const Register = () => {
       </div>
       <div className="md:w-full py-20 lg:w-2/5 min-h-screen flex items-center justify-center">
         <div className="sm:max-w-sm w-full md:max-w-xs">
-          {auth.error && (
-            <Alert
-              type="error"
-              label={auth.error}
-              icon={<FiAlertOctagon size={16} />}
-            />
-          )}
-          {auth.success && (
-            <Alert
-              type="success"
-              label={auth.success}
-              icon={<FiCheckCircle size={16} />}
-            />
-          )}
-          <span className="text-gray-700 block font-semibold">
+          {error && <Alert type="error" label={error} />}
+          {success && <Alert type="success" label={success} />}
+          <span className="text-gray-700 mt-4 block font-semibold">
             Welcome from
             <span className="ml-1 text-purple-500 font-semibold">
               Contact keeper

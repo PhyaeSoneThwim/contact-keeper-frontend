@@ -1,85 +1,62 @@
 const {
   LOGIN_SUCCESS,
-  SIGNUP_SUCCESS,
   LOGIN_FAIL,
   SIGNUP_FAIL,
+  SIGNUP_SUCCESS,
+  LOGOUT,
+  LOAD_USER,
+  SET_LOGIN,
   CLEAR_ERROR,
   CLEAR_SUCCESS,
-  SET_LOADING,
-  SET_ERROR,
-  SET_SUCCESS,
-  LOAD_USER,
-  SET_EXPIRES,
-  LOGOUT,
 } = require("./authTypes");
-
-const AuthReducer = (state, action) => {
-  switch (action.type) {
+const AuthReducer = (state, { type, payload }) => {
+  switch (type) {
     case LOGIN_SUCCESS:
-      const payload = action.payload;
-      localStorage.setItem("token", payload.token);
+      const { user, token } = payload;
+      localStorage.setItem("token", token);
+      return {
+        ...state,
+        user,
+        token,
+        isAuthenticated: true,
+        isTokenExpired: false,
+      };
+    case LOAD_USER:
       return {
         ...state,
         user: payload.user,
-        token: payload.token,
-        isAuthenticated: true,
-        isLoading: false,
-        isTokenExpired: false,
       };
-      break;
-    case LOAD_USER:
-      const { user, token } = action.payload;
-      return {
-        isAuthenticated: true,
-        isTokenExpired: false,
-        user,
-        token,
-      };
-      break;
-    case SET_LOADING:
+    case SET_LOGIN:
       return {
         ...state,
-        isLoading: true,
+        isAuthenticated: true,
+        isTokenExpired: false,
+        token: payload.token,
+      };
+    case SIGNUP_SUCCESS:
+      const { success } = payload;
+      return {
+        ...state,
+        success,
       };
     case LOGIN_FAIL:
     case SIGNUP_FAIL:
+      const { error } = payload;
       return {
         ...state,
-        user: null,
+        error,
         isAuthenticated: false,
-        error: action.payload.error,
-        isLoading: false,
       };
-      break;
-    case SET_SUCCESS:
-      return {
-        ...state,
-        success: action.payload.message,
-      };
-      break;
 
-    case CLEAR_SUCCESS:
-      return {
-        ...state,
-        success: null,
-      };
-      break;
-    case SET_ERROR:
-      return {
-        ...state,
-        error: action.payload.error,
-      };
-      break;
     case CLEAR_ERROR:
       return {
         ...state,
-        error: null,
+        error: "",
       };
-      break;
-    case SET_EXPIRES:
+    case CLEAR_SUCCESS:
       return {
         ...state,
-        isTokenExpired: true,
+        success: "",
       };
     case LOGOUT:
       localStorage.removeItem("token");

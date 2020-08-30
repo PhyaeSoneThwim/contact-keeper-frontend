@@ -1,19 +1,22 @@
 import React, { useContext, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import _login from "../../assets/images/_login.svg";
 import Input from "../../components/form/input";
 import Button from "../../components/form/button";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { Link, useHistory } from "react-router-dom";
+import Alert from "../../components/alert";
 import AuthContext from "../../context/auth/authContext";
+
 const Login = () => {
   const history = useHistory();
-  const auth = useContext(AuthContext);
+  const { isAuthenticated, login, error } = useContext(AuthContext);
+
   useEffect(() => {
-    if (auth.isAuthenticated) {
+    if (isAuthenticated) {
       history.push("/");
     }
-  }, [auth.isAuthenticated]);
+  }, [isAuthenticated]);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -26,7 +29,10 @@ const Login = () => {
         .required("Email is Required"),
     }),
     onSubmit: (values) => {
-      auth.login({ email: values.email, password: values.password });
+      login({
+        email: values.email,
+        password: values.password,
+      });
     },
   });
   return (
@@ -39,7 +45,8 @@ const Login = () => {
       </div>
       <div className="md:w-full lg:w-2/5 min-h-screen flex items-center justify-center">
         <div className="sm:max-w-sm w-full md:max-w-xs">
-          <span className="text-gray-700 block font-semibold">
+          {error && <Alert type="error" label={error} />}
+          <span className="text-gray-700 block mt-4 font-semibold">
             Welcome from
             <span className="ml-1 text-purple-500 font-semibold">
               Contact keeper

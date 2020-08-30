@@ -5,19 +5,10 @@ import ContactCard from "../../components/card/contactCard";
 import AddContact from "./addContact";
 import EditContact from "./editContact";
 import { useHistory } from "react-router-dom";
-import AuthContext from "../../context/auth/authContext";
 const Contacts = (props) => {
-  const history = useHistory();
-  const auth = useContext(AuthContext);
-  useEffect(() => {
-    if (!auth.isAuthenticated) {
-      history.push("/login");
-    }
-  }, [auth.isAuthenticated]);
   const [editId, setEditId] = useState(null);
   const [addOpen, setAddOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
-
   const toggleEditOpen = (id) => {
     if (editOpen) {
       setEditOpen(false);

@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Trash from "./pages/transh";
 import Contacts from "./pages/contacts";
 import AuthState from "./context/auth/authState";
+import PrivateRoute from "./route/privateRoute";
 function App() {
   return (
     <AuthState>
@@ -12,8 +13,8 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/trash" component={Trash} />
-          <Route path="/" component={Contacts} />
+          <PrivateRoute path="/trash" component={Trash} />
+          <PrivateRoute path="/" component={Contacts} />
         </Switch>
       </Router>
     </AuthState>
