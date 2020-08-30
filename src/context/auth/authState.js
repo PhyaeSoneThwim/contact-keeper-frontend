@@ -31,7 +31,7 @@ const AuthState = ({ children }) => {
     const token = localStorage.getItem("token");
     if (token) {
       const decode = jwtDecode(token);
-      const currentTime = Math.floor(new Date().getTime() / 1000) + 5000;
+      const currentTime = Math.floor(new Date().getTime() / 1000) + 5;
       const expiredIn = decode.exp - currentTime;
       setAuthToken(token);
       dispatch({

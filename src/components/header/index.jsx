@@ -6,11 +6,11 @@ import {
   FiPhoneCall,
   FiMail,
 } from "react-icons/fi";
-import ListItem from "../components/list/listItem";
-import IconButton from "../components/form/iconButton";
-import NavLink from "../components/navigation/navLink";
-import AuthContext from "../context/auth/authContext";
-const Header = ({ toggleAddOpen }) => {
+import ListItem from "../list/listItem";
+import IconButton from "../form/iconButton";
+import NavLink from "../navigation/navLink";
+import AuthContext from "../../context/auth/authContext";
+const Header = () => {
   const { logout, user, loadUser } = useContext(AuthContext);
   useEffect(() => {
     loadUser();
@@ -25,19 +25,12 @@ const Header = ({ toggleAddOpen }) => {
             </span>
             <ListItem icon={<FiMail size={16} />} label={user && user.email} />
           </div>
-          <div className="inline-flex space-x-2 items-center">
-            <IconButton
-              onClick={toggleAddOpen}
-              icon={<FiUsers size={16} />}
-              label="New Contacts"
-            />
-            <IconButton
-              onClick={logout}
-              variant="danger"
-              icon={<FiLogOut size={16} />}
-              label="Logout"
-            />
-          </div>
+          <IconButton
+            onClick={logout}
+            variant="danger"
+            icon={<FiLogOut size={16} />}
+            label="Logout"
+          />
         </div>
         <div className="inline-flex space-x-2 items-center">
           <NavLink to="/" icon={<FiPhoneCall size={14} />} label="Contacts" />

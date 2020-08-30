@@ -1,12 +1,18 @@
 import React from "react";
-import Search from "../../layouts/search";
-const SearchBar = (props) => {
+import Search from "./search";
+import IconButton from "../../components/form/iconButton";
+import { FiUserPlus } from "react-icons/fi";
+const SearchBar = ({ toggleAddOpen }) => {
   return (
     <div className="flex py-2 items-center justify-between">
-      <span className="font-semibold text-gray-700">Contact Lists</span>
       <div className="w-2/5">
         <Search />
       </div>
+      <IconButton
+        onClick={toggleAddOpen}
+        icon={<FiUserPlus size={14} />}
+        label="New contacts"
+      />
     </div>
   );
 };

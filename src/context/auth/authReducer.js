@@ -8,6 +8,7 @@ const {
   SET_LOGIN,
   CLEAR_ERROR,
   CLEAR_SUCCESS,
+  SET_EXPIRE,
 } = require("./authTypes");
 const AuthReducer = (state, { type, payload }) => {
   switch (type) {
@@ -65,6 +66,11 @@ const AuthReducer = (state, { type, payload }) => {
         user: null,
         token: null,
         isAuthenticated: false,
+        isTokenExpired: true,
+      };
+    case SET_EXPIRE:
+      return {
+        ...state,
         isTokenExpired: true,
       };
     default:
