@@ -5,6 +5,7 @@ import Header from "../../components/header";
 import TrashCard from "../../components/card/trashCard";
 import ContactContext from "../../context/contacts/contactContext";
 import Empty from "../../components/empty";
+import Dialog from "../../components/dialog";
 const DeletedContacts = (props) => {
   const history = useHistory();
   const { isAuthenticated, isTokenExpired } = useContext(AuthContext);
@@ -19,6 +20,7 @@ const DeletedContacts = (props) => {
   }, []);
   return (
     <div className="w-full min-h-screen">
+      {isTokenExpired && <Dialog />}
       <Header />
       <div className="w-full py-8">
         <div className="mx-auto w-3/5">

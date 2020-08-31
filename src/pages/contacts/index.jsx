@@ -8,6 +8,7 @@ import Header from "../../components/header";
 import SearchBar from "./searchBar";
 import Empty from "../../components/empty";
 import ContactContext from "../../context/contacts/contactContext";
+import Dialog from "../../components/dialog";
 const Contacts = (props) => {
   const history = useHistory();
   const { isAuthenticated, isTokenExpired } = useContext(AuthContext);
@@ -39,6 +40,7 @@ const Contacts = (props) => {
 
   return (
     <React.Fragment>
+      {isTokenExpired && <Dialog />}
       <EditContact
         editId={editId}
         editOpen={editOpen}
