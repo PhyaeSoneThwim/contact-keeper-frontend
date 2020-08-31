@@ -91,6 +91,7 @@ const AuthState = ({ children }) => {
     try {
       const response = await axios.post("/api/users/login", formData);
       const { data, token } = await response.data;
+      setAuthToken(token);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: { token, user: data.user },
