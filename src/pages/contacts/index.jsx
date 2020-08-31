@@ -69,7 +69,8 @@ const Contacts = (props) => {
                   );
                 }
               })}
-            {!contacts.filter((contact) => contact.status === "untrash") && (
+            {!contacts.filter((contact) => contact.status === "untrash")
+              .length && (
               <div className="w-1/3 my-12 mx-auto">
                 <Empty label="No contacts" />
               </div>
