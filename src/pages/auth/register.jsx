@@ -70,7 +70,6 @@ const Register = () => {
               <Input
                 name="name"
                 hint="Enter username"
-                value={formik.values.email}
                 label="Name"
                 type="text"
                 id="user_name"

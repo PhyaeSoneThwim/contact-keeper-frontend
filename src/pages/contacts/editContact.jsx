@@ -37,7 +37,6 @@ const EditContact = ({ editOpen, toggleEditOpen, editId }) => {
     updateContact(editId, contactData);
   };
   const { name, email, address, phone } = contactData;
-
   return (
     <SideDrawer maxWidth="md" open={editOpen} onClose={toggleEditOpen}>
       <div className="px-6">
