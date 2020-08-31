@@ -12,6 +12,7 @@ import {
   GET_UNTRASH_CONTACTS,
   SET_FORM_ERROR,
   CLEAR_FORM_ERROR,
+  SEARCH_CONTACTS,
 } from "./contactTypes";
 const ContactState = ({ children }) => {
   const initialState = {
@@ -106,6 +107,14 @@ const ContactState = ({ children }) => {
       });
     }
   };
+  const searchContacts = (search) => {
+    dispatch({
+      type: SEARCH_CONTACTS,
+      payload: {
+        search,
+      },
+    });
+  };
   return (
     <ContactContext.Provider
       value={{
@@ -113,6 +122,7 @@ const ContactState = ({ children }) => {
         error: state.error,
         formError: state.formError,
         addContact,
+        searchContacts,
         deleteContact,
         updateContact,
         getContacts,

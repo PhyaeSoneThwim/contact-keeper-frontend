@@ -8,6 +8,7 @@ import {
   GET_UNTRASH_CONTACTS,
   SET_FORM_ERROR,
   CLEAR_FORM_ERROR,
+  SEARCH_CONTACTS,
 } from "./contactTypes";
 const ContextReducer = (state, { type, payload }) => {
   switch (type) {
@@ -24,6 +25,14 @@ const ContextReducer = (state, { type, payload }) => {
         contacts: state.contacts.filter(
           (contact) => contact.status === "untrash"
         ),
+      };
+    case SEARCH_CONTACTS:
+      return {
+        ...state,
+        contacts: state.contacts.filter((contact) => {
+          const regex = new RegExp(`${payload.search}`, "gi");
+          return contact.name.match(regex) || contact.email.match(regex);
+        }),
       };
     case GET_TRASH_CONTACTS:
       return {

@@ -9,7 +9,6 @@ import ContactContext from "../../context/contacts/contactContext";
 import { FiAlertCircle } from "react-icons/fi";
 const AddContact = ({ addOpen, toggleAddOpen }) => {
   const { addContact, formError } = useContext(ContactContext);
-
   const formik = useFormik({
     initialValues: {
       name: "",
