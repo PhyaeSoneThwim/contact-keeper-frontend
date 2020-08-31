@@ -12,12 +12,7 @@ import {
 const TrashCard = ({ id, imgUrl, name, phone, email, address }) => {
   return (
     <div className="flex mt-2 border border-gray rounded-lg py-2 px-3 items-start">
-      <img
-        alt="contact_card_image"
-        className="w-12 h-12 rounded-full"
-        src={imgUrl}
-      />
-      <div className="flex-1 ml-4">
+      <div className="flex-1">
         <span className="text-lg font-semibold">{name}</span>
         <ListItem size="sm" label={phone} icon={<FiPhoneCall size={14} />} />
         <ListItem size="sm" label={email} icon={<FiMail size={14} />} />

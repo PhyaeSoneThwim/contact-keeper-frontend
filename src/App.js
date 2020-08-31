@@ -6,17 +6,20 @@ import Trash from "./pages/transh";
 import Contacts from "./pages/contacts";
 import AuthState from "./context/auth/authState";
 import PrivateRoute from "./route/privateRoute";
+import ContactState from "./context/contacts/contactState";
 function App() {
   return (
     <AuthState>
-      <Router>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <PrivateRoute path="/trash" component={Trash} />
-          <PrivateRoute path="/" component={Contacts} />
-        </Switch>
-      </Router>
+      <ContactState>
+        <Router>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <PrivateRoute path="/trash" component={Trash} />
+            <PrivateRoute path="/" component={Contacts} />
+          </Switch>
+        </Router>
+      </ContactState>
     </AuthState>
   );
 }

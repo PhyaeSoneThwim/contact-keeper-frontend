@@ -6,14 +6,21 @@ import AuthContext from "../../context/auth/authContext";
 import UntrashCard from "../../components/card/untrashCard";
 import Header from "../../components/header";
 import SearchBar from "./searchBar";
+import Empty from "../../components/empty";
+import ContactContext from "../../context/contacts/contactContext";
 const Contacts = (props) => {
   const history = useHistory();
   const { isAuthenticated, isTokenExpired } = useContext(AuthContext);
+  const { contacts, error, getContacts } = useContext(ContactContext);
   useEffect(() => {
     if (!isAuthenticated) {
       history.push("/login");
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    getContacts();
+  }, []);
   const [editId, setEditId] = useState(null);
   const [addOpen, setAddOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -43,16 +50,24 @@ const Contacts = (props) => {
         <div className="w-full py-8">
           <div className="mx-auto w-3/5">
             <SearchBar toggleAddOpen={toggleAddOpen} />
-            <UntrashCard
-              onEdit={toggleEditOpen}
-              id={1}
-              address="88, Strand Road, Kyauktada Township, Yangon."
-              email="daniel.garrett@example.com"
-              phone="0912121212"
-              gender="Male"
-              imgUrl="https://randomuser.me/api/portraits/men/43.jpg"
-              name="Daniel Garrett"
-            />
+            {contacts.length > 0 &&
+              contacts.map((contact, index) => (
+                <UntrashCard
+                  key={index}
+                  onEdit={toggleEditOpen}
+                  id={contact._id}
+                  address={contact.address}
+                  email={contact.email}
+                  phone={contact.phone}
+                  imgUrl={contact.photo}
+                  name={contact.name}
+                />
+              ))}
+            {!contacts.length > 0 && (
+              <div className="w-1/3 my-12 mx-auto">
+                <Empty label="No contacts" />
+              </div>
+            )}
           </div>
         </div>
       </div>

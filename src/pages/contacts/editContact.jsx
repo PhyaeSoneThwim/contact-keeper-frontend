@@ -29,70 +29,56 @@ const EditContact = ({ editOpen, toggleEditOpen, editId }) => {
     });
   };
   return (
-    <SideDrawer maxWidth="2xl" open={editOpen} onClose={toggleEditOpen}>
+    <SideDrawer maxWidth="md" open={editOpen} onClose={toggleEditOpen}>
       <div className="px-6">
         <span className="font-semibold text-gray-700">
           Edit contact information
         </span>
-        <div className="flex items-start">
-          <div className="w-1/2">
-            <div className="mt-4">
-              <Input
-                id="edit_name"
-                onChange={handleChange}
-                hint="Mg/Ma"
-                label="Name"
-                name="name"
-                type="text"
-              />
-            </div>
-            <div className="mt-4">
-              <Input
-                id="edit_phone_number"
-                onChange={handleChange}
-                hint="()-()"
-                label="Phone Number"
-                name="phone"
-                type="text"
-              />
-            </div>
-            <div className="mt-4">
-              <Input
-                id="edit_email_address"
-                onChange={handleChange}
-                hint="@email"
-                label="Email address"
-                name="email"
-                type="text"
-              />
-            </div>
-            <div className="mt-4">
-              <Input
-                id="edit_address"
-                onChange={handleChange}
-                hint="Enter address.."
-                label="Address"
-                name="address"
-                type="text"
-              />
-            </div>
-            <div className="mt-4">
-              <Button label="Update" type="submit" />
-            </div>
+        <form>
+          <div className="mt-4">
+            <Input
+              id="edit_name"
+              onChange={handleChange}
+              hint="Mg/Ma"
+              label="Name"
+              name="name"
+              type="text"
+            />
           </div>
-          <div className="w-1/2">
-            <div className="w-1/2 mx-auto">
-              <ImagePicker
-                label="Photo"
-                onChangeFile={onChangeFile}
-                name="photo"
-                onClearFile={onClearFile}
-                icon={<FiUser size={18} />}
-                roundedFull
-              />
-            </div>
+          <div className="mt-4">
+            <Input
+              id="edit_phone_number"
+              onChange={handleChange}
+              hint="()-()"
+              label="Phone Number"
+              name="phone"
+              type="text"
+            />
           </div>
-        </div>
+          <div className="mt-4">
+            <Input
+              id="edit_email_address"
+              onChange={handleChange}
+              hint="@email"
+              label="Email address"
+              name="email"
+              type="text"
+            />
+          </div>
+          <div className="mt-4">
+            <Input
+              id="edit_address"
+              onChange={handleChange}
+              hint="Enter address.."
+              label="Address"
+              name="address"
+              type="text"
+            />
+          </div>
+          <div className="mt-4">
+            <Button label="Update" type="submit" />
+          </div>
+        </form>
       </div>
     </SideDrawer>
   );
