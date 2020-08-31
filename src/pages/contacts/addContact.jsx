@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import SideDrawer from "../../components/drawer/sideDrawer";
 import Input from "../../components/form/input";
-import ImagePicker from "../../components/form/imagePicker";
 import Button from "../../components/form/button";
-import { FiUser } from "react-icons/fi";
-import AuthContext from "../../context/auth/authContext";
+import Alert from "../../components/alert";
 import ContactContext from "../../context/contacts/contactContext";
+import { FiAlertCircle } from "react-icons/fi";
 const AddContact = ({ addOpen, toggleAddOpen }) => {
-  const { addContact } = useContext(ContactContext);
+  const { addContact, formError } = useContext(ContactContext);
   const [contactData, setContactData] = useState({
     name: "",
     email: "",
@@ -23,12 +22,22 @@ const AddContact = ({ addOpen, toggleAddOpen }) => {
     event.preventDefault();
     addContact(contactData);
   };
+
   return (
     <SideDrawer maxWidth="md" open={addOpen} onClose={toggleAddOpen}>
       <div className="px-6">
         <span className="font-semibold text-gray-700">
           Add Contact Information
         </span>
+        {formError && (
+          <div className="my-2">
+            <Alert
+              type="error"
+              label={formError}
+              icon={<FiAlertCircle size={16} />}
+            />
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="mt-4">
             <Input

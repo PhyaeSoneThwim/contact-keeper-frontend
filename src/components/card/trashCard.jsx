@@ -9,18 +9,30 @@ import {
   FiTrash,
   FiCornerUpLeft,
 } from "react-icons/fi";
-const TrashCard = ({ id, imgUrl, name, phone, email, address }) => {
+import { useContext } from "react";
+import ContactContext from "../../context/contacts/contactContext";
+const TrashCard = ({ id, name, phone, email, address }) => {
+  const { deleteContact, updateContact } = useContext(ContactContext);
   return (
     <div className="flex mt-2 border border-gray rounded-lg py-2 px-3 items-start">
       <div className="flex-1">
         <span className="text-lg font-semibold">{name}</span>
-        <ListItem size="sm" label={phone} icon={<FiPhoneCall size={14} />} />
-        <ListItem size="sm" label={email} icon={<FiMail size={14} />} />
-        <ListItem size="sm" label={address} icon={<FiMap size={14} />} />
+        {phone && (
+          <ListItem size="sm" label={phone} icon={<FiPhoneCall size={14} />} />
+        )}
+        {email && (
+          <ListItem size="sm" label={email} icon={<FiMail size={14} />} />
+        )}
+        {address && (
+          <ListItem size="sm" label={address} icon={<FiMap size={14} />} />
+        )}
       </div>
       <div className="inline-flex items-center">
-        <Icon icon={<FiCornerUpLeft size={14} />} />
-        <Icon icon={<FiTrash size={14} />} />
+        <Icon
+          onClick={() => updateContact(id, { status: "untrash" })}
+          icon={<FiCornerUpLeft size={14} />}
+        />
+        <Icon onClick={() => deleteContact(id)} icon={<FiTrash size={14} />} />
       </div>
     </div>
   );

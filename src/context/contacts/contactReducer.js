@@ -1,4 +1,14 @@
-import { GET_CONTACTS, SET_ERRORS, ADD_CONTACT } from "./contactTypes";
+import {
+  GET_CONTACTS,
+  SET_ERRORS,
+  ADD_CONTACT,
+  DELETE_CONTACT,
+  UPDATE_CONTACT,
+  GET_TRASH_CONTACTS,
+  GET_UNTRASH_CONTACTS,
+  SET_FORM_ERROR,
+  CLEAR_FORM_ERROR,
+} from "./contactTypes";
 const ContextReducer = (state, { type, payload }) => {
   switch (type) {
     case GET_CONTACTS:
@@ -7,6 +17,20 @@ const ContextReducer = (state, { type, payload }) => {
         ...state,
         contacts: contacts,
         error: "",
+      };
+    case GET_UNTRASH_CONTACTS:
+      return {
+        ...state,
+        contacts: state.contacts.filter(
+          (contact) => contact.status === "untrash"
+        ),
+      };
+    case GET_TRASH_CONTACTS:
+      return {
+        ...state,
+        contacts: state.contacts.filter(
+          (contact) => contact.status === "trash"
+        ),
       };
     case SET_ERRORS:
       const { error } = payload;
@@ -19,6 +43,29 @@ const ContextReducer = (state, { type, payload }) => {
       return {
         ...state,
         contacts: [...state.contacts, contact],
+      };
+    case SET_FORM_ERROR:
+      return {
+        ...state,
+        formError: payload.error,
+      };
+    case CLEAR_FORM_ERROR:
+      return {
+        ...state,
+        formError: "",
+      };
+    case UPDATE_CONTACT:
+      return {
+        ...state,
+        contacts: state.contacts.map((contact) =>
+          contact._id === payload.contact._id ? payload.contact : contact
+        ),
+      };
+    case DELETE_CONTACT:
+      const { contactId } = payload;
+      return {
+        ...state,
+        contacts: state.contacts.filter((contact) => contact._id !== contactId),
       };
     default:
       return state;

@@ -11,16 +11,16 @@ import ContactContext from "../../context/contacts/contactContext";
 const Contacts = (props) => {
   const history = useHistory();
   const { isAuthenticated, isTokenExpired } = useContext(AuthContext);
-  const { contacts, error, getContacts } = useContext(ContactContext);
+  const { contacts, getContacts, updateContact } = useContext(ContactContext);
+  useEffect(() => {
+    getContacts();
+  }, []);
   useEffect(() => {
     if (!isAuthenticated) {
       history.push("/login");
     }
   }, [isAuthenticated]);
 
-  useEffect(() => {
-    getContacts();
-  }, []);
   const [editId, setEditId] = useState(null);
   const [addOpen, setAddOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -51,19 +51,25 @@ const Contacts = (props) => {
           <div className="mx-auto w-3/5">
             <SearchBar toggleAddOpen={toggleAddOpen} />
             {contacts.length > 0 &&
-              contacts.map((contact, index) => (
-                <UntrashCard
-                  key={index}
-                  onEdit={toggleEditOpen}
-                  id={contact._id}
-                  address={contact.address}
-                  email={contact.email}
-                  phone={contact.phone}
-                  imgUrl={contact.photo}
-                  name={contact.name}
-                />
-              ))}
-            {!contacts.length > 0 && (
+              contacts.map((contact, index) => {
+                if (contact.status === "untrash") {
+                  return (
+                    <UntrashCard
+                      key={index}
+                      id={contact._id}
+                      onUpdate={updateContact}
+                      onEdit={toggleEditOpen}
+                      id={contact._id}
+                      address={contact.address}
+                      email={contact.email}
+                      phone={contact.phone}
+                      imgUrl={contact.photo}
+                      name={contact.name}
+                    />
+                  );
+                }
+              })}
+            {!contacts.filter((contact) => contact.status === "untrash") && (
               <div className="w-1/3 my-12 mx-auto">
                 <Empty label="No contacts" />
               </div>

@@ -16,7 +16,7 @@ const Header = () => {
     loadUser();
   }, []);
   return (
-    <div className="w-full sticky top-0 border-b border-gray-200 bg-gray-100">
+    <div className="w-full z-20 sticky top-0 border-b border-gray-200 bg-gray-100">
       <div className="w-3/5 mx-auto">
         <div className="flex justify-between py-4 items-start">
           <div className="inline-flex flex-col">
