@@ -32,7 +32,8 @@ const AuthState = ({ children }) => {
     if (token) {
       const decode = jwtDecode(token);
       const currentTime = Math.floor(new Date().getTime() / 1000) + 5;
-      const expiredIn = decode.exp - currentTime;
+      const expiredIn = (decode.exp - currentTime) * 1000;
+      console.log(expiredIn);
       setAuthToken(token);
       dispatch({
         type: SET_LOGIN,

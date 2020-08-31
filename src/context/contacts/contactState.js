@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 import axios from "axios";
+import setAuthToken from "../../utils/setAuthToken";
 import ContactContext from "./contactContext";
 import ContactReducer from "./contactReducer";
 import {
@@ -21,6 +22,7 @@ const ContactState = ({ children }) => {
     formError: "",
   };
   const [state, dispatch] = useReducer(ContactReducer, initialState);
+
   useEffect(() => {
     let errorTimeOut;
     if (state.formError) {
